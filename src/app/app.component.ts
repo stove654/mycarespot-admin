@@ -16,55 +16,44 @@ import { AppState } from './app.service';
     './app.component.css'
   ],
   template: `
-    <nav>
-      <a [routerLink]=" ['./'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Index
-      </a>
-      <a [routerLink]=" ['./home'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Home
-      </a>
-      <a [routerLink]=" ['./detail'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Detail
-      </a>
-      <a [routerLink]=" ['./barrel'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Barrel
-      </a>
-      <a [routerLink]=" ['./about'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        About
-      </a>
-      <a *ngIf="showDevModule" [routerLink]=" ['./dev-module'] "
-         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        DevModule
-      </a>
-    </nav>
-
+    <header>
+      <div class="cont">
+        <div class="Hlogo">
+          <img src="../assets/MyCareSpot.png" alt="My Care Spot">
+        </div>
+        <nav class="menuGen Hlogin">
+          <ul>
+            <li><a>Sign up</a></li><!--
+            --><li><a class="current">Log In</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
     <main>
       <router-outlet></router-outlet>
     </main>
 
-    <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-
     <footer>
-      <span>Angular Starter by <a [href]="twitter">@gdi2290</a></span>
-      <div>
-        <a [href]="url">
-          <img [src]="tipe" width="25%">
-        </a>
+      <div class="cont">
+        <div class="menufooter">
+          <a href="">about us</a>
+          <a href="">support</a>
+          <a href="">blog</a>
+          <a href="">press</a>
+          <a href="">jobs</a>
+          <a href="">privacy</a>
+          <a href="">terms</a>
+          <a href="">language</a>
+        </div>
+        <div class="legal">
+          © 2018 mycarespot
+        </div>
       </div>
     </footer>
   `
 })
 export class AppComponent implements OnInit {
-  public name = 'Angular Starter';
-  public tipe = 'assets/img/tipe.png';
-  public twitter = 'https://twitter.com/gdi2290';
-  public url = 'https://tipe.io';
-  public showDevModule: boolean = environment.showDevModule;
 
   constructor(
     public appState: AppState
