@@ -1,7 +1,7 @@
 {
   "name": "angular-starter",
   "version": "7.5.0",
-  "description": "An Angular Webpack Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by Tipe.io",
+  "description": "®2018 Mycarespot es una marca registrada de Futucare, LLC. Todos los derechos reservados.",
   "keywords": [
     "angular",
     "angular2",
@@ -12,8 +12,8 @@
     "tipe",
     "tipe.io"
   ],
-  "author": "Patrick Stapleton <patrick@tipe.io>",
-  "homepage": "https://github.com/gdi2290/angular-starter",
+  "author": "MycareSpot",
+  "homepage": "MycareSpot",
   "license": "MIT",
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 SOURCE_MAP=0 npm run webpack -- --config config/webpack.prod.js  --progress --profile --bail",
