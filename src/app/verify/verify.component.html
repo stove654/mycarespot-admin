@@ -4,7 +4,7 @@
 			<h1 class="titleGray">Set up 2-factor verification</h1>
 			<p>We sent a security cow to <b>{{user.phone}}</b></p>
 			<p>Enter the 4 digit security code from the message "Your Mycarespot verification code is ****" . If you haven’t received the message, <a>request another code</a>.</p>
-			<input type="number" placeholder="Security code" formControlName="code" required>
+			<input type="text" placeholder="Security code" formControlName="code" required>
 			<button type="submit" class="btnGen" [disabled]="!verifyform.valid" *ngIf="!isLoading">Continue</button>
 			<button type="button" class="btnGen" *ngIf="isLoading">Sending...</button>
 		</form>
