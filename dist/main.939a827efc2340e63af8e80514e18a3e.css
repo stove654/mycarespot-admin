@@ -1274,7 +1274,7 @@ label {
   margin-bottom: 5px; }
 
 /*=======================================================*/
-input[type="text"], input[type="email"], input[type="password"], input[type="date"], textarea, .select select {
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], textarea, .select select, input[type="tel"], input[type="number"] {
   display: block;
   width: 100%;
   font-family: 'Helvetica Neue';
@@ -2403,4 +2403,4 @@ footer .legal {
 
  */
 
-/*# sourceMappingURL=main.524c3a565ba0f7fd41242530a2c94aee.css.map*/
+/*# sourceMappingURL=main.939a827efc2340e63af8e80514e18a3e.css.map*/

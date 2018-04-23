@@ -1,15 +1,16 @@
 <div class="containerH">
-  <div class="box boxWidth boxLogin boxMargin">
-    <form action="">
-      <h1 class="titleGray">Log in</h1>
-      <input type="email" placeholder="Email">
-      <input type="password" placeholder="Password" class="error">
-      <input type="submit" class="btnGen" value="Log in">
-      <div class="msgError">Sorry, your password was incorrect. Please double-check your password.</div>
-      <a href="" class="linkGray center forgot">Forgot password?</a>
-    </form>
-  </div>
-  <div class="box boxWidth boxMin center create">
-    Don’t have an account? <a href="" class="">Sign up</a>
-  </div>
+	<div class="box boxWidth boxLogin boxMargin">
+		<form [formGroup]="loginform" (ngSubmit)="login()">
+			<h1 class="titleGray">Log in</h1>
+			<input type="text" placeholder="Username" formControlName="username" required>
+			<input type="password" placeholder="Password" formControlName="password" required>
+			<button type="submit" class="btnGen" [disabled]="!loginform.valid" *ngIf="!isLoading">Log in</button>
+			<button type="button" class="btnGen" *ngIf="isLoading">Sending...</button>
+			<!--<div class="msgError">Sorry, your password was incorrect. Please double-check your password.</div>-->
+			<a href="" class="linkGray center forgot">Forgot password?</a>
+		</form>
+	</div>
+	<div class="box boxWidth boxMin center create">
+		Don’t have an account? <a (click)="goSignup()" class="">Sign up</a>
+	</div>
 </div>

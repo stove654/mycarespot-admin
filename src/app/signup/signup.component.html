@@ -1,0 +1,28 @@
+<div class="containerH">
+	<div class="box boxWidth boxSignUp boxMargin">
+		<form [formGroup]="userform" (ngSubmit)="signup()">
+			<h1 class="titleGray">Sign up</h1>
+			<input type="text" placeholder="Username" formControlName="username" required>
+			<input type="password" placeholder="Password" formControlName="password" required>
+			<div class="list-country" style="margin-bottom: 15px;">
+				<span>Select Your Country: {{selectedValue}}</span>
+				<select formControlName="selectedValue">
+					<option>Select Country</option>
+					<option *ngFor="let c of countries" [ngValue]="c.code">{{c.char}} +{{c.code}}</option>
+				</select>
+			</div>
+			<input type="tel" placeholder="Phone Number" formControlName="phone" required>
+
+			<input type="email" placeholder="Email" formControlName="email" required>
+			<input type="text" placeholder="First Name" formControlName="firstName" required>
+			<input type="text" placeholder="Last Name" formControlName="lastName" required>
+			<button type="submit" class="btnGen" [disabled]="!userform.valid" *ngIf="!isLoading">Sign up</button>
+			<button type="button" class="btnGen" *ngIf="isLoading">Sending...</button>
+			<!--<div class="msgError">This field is required.</div>-->
+			<!--<a href="" class="linkGray center forgot">Forgot password?</a>-->
+		</form>
+	</div>
+	<div class="box boxWidth boxMin center create">
+		Have an account?  <a [routerLink]=" ['../login'] " class="">Log in</a>
+	</div>
+</div>
