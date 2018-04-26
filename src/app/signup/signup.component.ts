@@ -55,7 +55,7 @@ export class SignupComponent implements OnInit {
 		if (data.phone[0] == 0) {
 			data.phone = data.phone.substr(1);
 		}
-		data.countryCode = '+84';
+		data.countryCode = '+1';
 		data.phone = data.countryCode + data.phone;
 		this.isLoading = true;
 		this.invalid = false;
@@ -66,7 +66,7 @@ export class SignupComponent implements OnInit {
 				user: data,
 				token: null
 			}));
-			
+
 			let dataUser = <any>data;
 			if (data == 422) {
 				this.invalid = true;
