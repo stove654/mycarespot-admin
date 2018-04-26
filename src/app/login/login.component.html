@@ -1,16 +1,28 @@
-<div class="containerH">
+<div class="containerH" *ngIf="!isVerifyEmail">
 	<div class="box boxWidth boxLogin boxMargin">
 		<form [formGroup]="loginform" (ngSubmit)="login()">
 			<h1 class="titleGray">Log in</h1>
-			<input type="text" placeholder="Username" formControlName="username" required>
+			<input type="email" placeholder="Email" formControlName="email" required>
 			<input type="password" placeholder="Password" formControlName="password" required>
 			<button type="submit" class="btnGen" [disabled]="!loginform.valid" *ngIf="!isLoading">Log in</button>
 			<button type="button" class="btnGen" *ngIf="isLoading">Sending...</button>
-			<!--<div class="msgError">Sorry, your password was incorrect. Please double-check your password.</div>-->
+			<div class="msgError" *ngIf="invalid">Sorry, invalid email or password.</div>
 			<a href="" class="linkGray center forgot">Forgot password?</a>
 		</form>
 	</div>
 	<div class="box boxWidth boxMin center create">
 		Don’t have an account? <a (click)="goSignup()" class="">Sign up</a>
+	</div>
+</div>
+
+
+<div class="containerH" *ngIf="isVerifyEmail">
+	<div class="cont boxThank">
+		<h1>Thank you.</h1>
+		<p>We sent a verification email to you at: {{userform.value.email}}. Click on the Verify your email link in the message to verify your address. If this isn't your email, please update it.</p>
+		<h4 class="bold">Where's my email?</h4>
+		<p>If you don’t receive an email from Mycarespot, be sure to check your spam folder. Certain email providers can take longer than 20 minutes to process the message. If you still haven't received it, you can always request another email.</p>
+		<h4 class="bold">Your security is our top priority.</h4>
+		<p>We'll text a code to your cell phone during the setup process to authenticate your identity. This helps us protect your account from unauthorized access. Please make sure to have your phone nearby.</p>
 	</div>
 </div>

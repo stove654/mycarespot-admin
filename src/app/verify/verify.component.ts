@@ -1,6 +1,6 @@
 import {
 	Component,
-	OnInit
+	OnInit,
 } from '@angular/core';
 
 import {AppState} from '../app.service';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 
 import {Config} from '../app.config';
 
+let self;
 @Component({
 	/**
 	 * The selector is what angular internally uses
@@ -22,9 +23,11 @@ import {Config} from '../app.config';
 	templateUrl: './verify.component.html'
 })
 export class VerifyComponent implements OnInit {
+
 	verifyform: FormGroup;
 	isLoading =  false;
-	user = JSON.parse(window.localStorage.getItem('currentUser'));
+	user = JSON.parse(window.localStorage.getItem('auth')).user;
+	invalid = false;
 	/**
 	 * Set our default values
 	 */
@@ -32,6 +35,7 @@ export class VerifyComponent implements OnInit {
 	 * TypeScript public modifiers
 	 */
 	constructor(public appState: AppState,  private http: HttpClient, private router: Router) {
+		self = this;
 	}
 
 	public ngOnInit() {
@@ -44,16 +48,15 @@ export class VerifyComponent implements OnInit {
 		 */
 	}
 
-	private verify() {
-		let user = JSON.parse(window.localStorage.getItem('currentUser'));
-		console.log(user)
+	verify() {
 		let params = {
 			code: this.verifyform.value.code,
-			authyId: user.authyId,
-			realPhone: user.realPhone,
-			countryCode: user.countryCode,
-			_id: user._id
+			authyId: this.user.authyId,
+			realPhone: this.user.realPhone,
+			countryCode: this.user.countryCode,
+			_id: this.user._id
 		};
+		this.invalid = false;
 
 		this.http.post(Config.url + Config.api.auth, params).subscribe(data => {
 
@@ -61,8 +64,22 @@ export class VerifyComponent implements OnInit {
 			this.router.navigate(['home']);
 			window.location.reload();
 			console.log(data);
+		}, function () {
+			console.log('error')
+			self.invalid = true;
 		});
 		console.log(params)
 	}
 
+
+	requestCode() {
+		window.alert('Sent code via SMS!')
+		this.http.post(Config.url + Config.api.requestCode, {
+			_id: self.user._id
+		}).subscribe(data => {
+
+		}, function () {
+
+		});
+	}
 }

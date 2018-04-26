@@ -4,6 +4,8 @@ export const Config = {
 		user: '/api/users/',
 		auth: '/auth/phone/',
 		login: '/auth/local/',
+		verifyEmail: '/auth/verify-email/',
+		requestCode: '/auth/request-sms/',
 		country: '/api/country/',
 	}
 };

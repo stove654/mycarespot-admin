@@ -22,7 +22,7 @@ import {Router} from '@angular/router';
 				<div class="Hlogo">
 					<img src="../assets/MyCareSpot.png" alt="My Care Spot">
 				</div>
-				<nav class="menuGen Hlogin" *ngIf="!currentUser.active">
+				<nav class="menuGen Hlogin" *ngIf="!currentUser.verifyEmail || !currentUser.verifyPhone">
 					<ul>
 						<li><a [routerLink]=" ['./signup'] " routerLinkActive="current"
 							   [routerLinkActiveOptions]="{exact: true}">Sign up</a></li>
@@ -30,7 +30,7 @@ import {Router} from '@angular/router';
 							   [routerLinkActiveOptions]="{exact: true}">Log In</a></li>
 					</ul>
 				</nav>
-				<nav class="menuGen Hlogin" *ngIf="currentUser.active">
+				<nav class="menuGen Hlogin" *ngIf="currentUser.verifyEmail && currentUser.verifyPhone">
 					<ul>
 						<li><a (click)="logOut()">Log out</a></li>
 						
@@ -67,7 +67,8 @@ import {Router} from '@angular/router';
 export class AppComponent implements OnInit {
 	currentUser = {
 		_id: null,
-		active: false
+		verifyEmail: false,
+		verifyPhone: false,
 	};
 
 	constructor(public appState: AppState, private router: Router) {
@@ -78,7 +79,7 @@ export class AppComponent implements OnInit {
 			this.currentUser = JSON.parse(window.localStorage.getItem('auth')).user;
 		}
 
-		if (this.currentUser._id && this.currentUser.active) {
+		if (this.currentUser._id && this.currentUser.verifyPhone) {
 			this.router.navigate(['home']);
 		}
 		console.log('Initial App State', this.appState.state);
@@ -88,7 +89,8 @@ export class AppComponent implements OnInit {
 		window.localStorage.clear();
 		this.currentUser = {
 			_id: null,
-			active: false
+			verifyEmail: false,
+			verifyPhone: false,
 		};
 		this.router.navigate(['login']);
 	}

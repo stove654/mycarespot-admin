@@ -8,7 +8,7 @@ import {FormGroup, FormControl} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Config} from '../app.config';
 import {Router} from '@angular/router';
-
+let self;
 @Component({
 	/**
 	 * The selector is what angular internally uses
@@ -23,6 +23,8 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 	loginform: FormGroup;
 	isLoading = false;
+	isVerifyEmail = false;
+	invalid = false;
 	/**
 	 * Set our default values
 	 */
@@ -30,11 +32,12 @@ export class LoginComponent implements OnInit {
 	 * TypeScript public modifiers
 	 */
 	constructor(public appState: AppState, private http: HttpClient, private router: Router) {
+		self = this;
 	}
 
 	public ngOnInit() {
 		this.loginform = new FormGroup({
-			username: new FormControl(),
+			email: new FormControl(),
 			password: new FormControl()
 		});
 		console.log('hello `login` component');
@@ -45,14 +48,43 @@ export class LoginComponent implements OnInit {
 
 	login() {
 		this.isLoading = true;
-		this.http.post(Config.url + Config.api.login, this.loginform.value).subscribe(data => {
+		self.invalid = false;
+
+		this.http.post(Config.url + Config.api.login, this.loginform.value).subscribe(res => {
+			this.isLoading = false;
+			let data = <any>res;
 			console.log(data);
-			this.isLoading = false;
-			window.localStorage.setItem('auth', JSON.stringify(data));
-			this.router.navigate(['home']);
-			window.location.reload()
+			if (data) {
+				if (data.success) {
+					if (!data.user.verifyEmail) {
+						this.isVerifyEmail = true;
+					} else if (!data.user.verifyPhone) {
+						this.http.post(Config.url + Config.api.requestCode, {
+							_id: data.user._id
+						}).subscribe(data => {
+
+						}, function () {
+
+						});
+						this.router.navigate(['verify']);
+					} else if (data.user.verifyEmail && data.user.verifyPhone) {
+						console.log(data);
+						window.localStorage.setItem('auth', JSON.stringify(data));
+						this.router.navigate(['home']);
+						window.location.reload()
+					}
+				} else {
+					this.invalid = true;
+
+				}
+
+			}
+
 		}, function () {
-			this.isLoading = false;
+			console.log('11111')
+			self.isLoading = false;
+			self.invalid = true;
+
 		});
 	}
 

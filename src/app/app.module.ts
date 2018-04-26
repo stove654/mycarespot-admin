@@ -19,6 +19,7 @@ import {AboutComponent} from './about';
 import {LoginComponent} from './login';
 import {SignupComponent} from './signup';
 import {VerifyComponent} from './verify';
+import {EmailComponent} from './email';
 import {NoContentComponent} from './no-content';
 import {XLargeDirective} from './home/x-large';
 import {DevModuleModule} from './+dev-module';
@@ -51,7 +52,8 @@ interface StoreType {
 		XLargeDirective,
 		LoginComponent,
 		SignupComponent,
-		VerifyComponent
+		VerifyComponent,
+		EmailComponent
 	],
 	/**
 	 * Import Angular's modules.
