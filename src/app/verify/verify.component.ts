@@ -85,7 +85,7 @@ export class VerifyComponent implements OnInit {
 		if (data.phone[0] == 0) {
 			data.phone = data.phone.substr(1);
 		}
-		if (Config.url == 'http://52.224.110.147:8080') {
+		if (Config.url == 'http://localhost:8080') {
 			data.countryCode = '+84';
 		} else {
 			data.countryCode = '+1';
