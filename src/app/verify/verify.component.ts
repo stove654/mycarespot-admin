@@ -9,6 +9,7 @@ import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import {Config} from '../app.config';
+import {config} from "shelljs";
 
 let self;
 @Component({
@@ -84,7 +85,11 @@ export class VerifyComponent implements OnInit {
 		if (data.phone[0] == 0) {
 			data.phone = data.phone.substr(1);
 		}
-		data.countryCode = '+84';
+		if (Config.url == 'http://52.224.110.147:8080') {
+			data.countryCode = '+84';
+		} else {
+			data.countryCode = '+1';
+		}
 		data.phone = data.countryCode + data.phone;
 		data._id = self.user._id;
 		this.isLoading =  true;
