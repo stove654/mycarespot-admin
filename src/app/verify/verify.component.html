@@ -1,4 +1,4 @@
-<div class="containerH">
+<div class="containerH" *ngIf="isVerify">
 	<div class="box boxWidth boxWelcome boxMargin">
 		<form [formGroup]="verifyform" (ngSubmit)="verify()">
 			<h1 class="titleGray">Set up 2-factor verification</h1>
@@ -9,6 +9,20 @@
 			<button type="button" class="btnGen" *ngIf="isLoading">Sending...</button>
 			<div class="msgError" *ngIf="invalid">Invalid Code.</div>
 
+		</form>
+	</div>
+</div>
+
+
+<div class="containerH" *ngIf="!isVerify">
+	<div class="box boxWidth boxWelcome boxMargin">
+		<form [formGroup]="phoneform" (ngSubmit)="requestPhone()">
+			<h1 class="titleGray">Set up 2-factor verification</h1>
+			<p>Enhance you security by providing your US phone (+1). You will receive a security code now (cellphone recommended). Use a phone that can you can access from anywhere. We will send a security code when you need to reset your password or login from a new browser or computer.</p>
+			<input type="text" placeholder="Mobile phone" formControlName="realPhone" required>
+			<button type="submit" class="btnGen" value="Continue" [disabled]="!phoneform.valid">Send</button>
+			<button type="button" class="btnGen" *ngIf="isLoading">Sending...</button>
+			<div class="msgError" *ngIf="invalid">Invalid Phone Number.</div>
 		</form>
 	</div>
 </div>

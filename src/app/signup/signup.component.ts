@@ -26,6 +26,8 @@ export class SignupComponent implements OnInit {
 	isLoading = false;
 	isVerifyEmail = false;
 	invalid = false;
+	isPassword = false;
+	email = '';
 	/**
 	 * Set our default values
 	 */
@@ -40,7 +42,7 @@ export class SignupComponent implements OnInit {
 		this.userform = new FormGroup({
 			email: new FormControl(),
 			password: new FormControl(),
-			phone: new FormControl(),
+			repassword: new FormControl(),
 			lastName: new FormControl(),
 			firstName: new FormControl(),
 		});
@@ -49,14 +51,16 @@ export class SignupComponent implements OnInit {
 	}
 
 	signup () {
+		this.isPassword = false;
+		if (this.userform.value.password != this.userform.value.repassword) return this.isPassword = true;
 		console.log(this.userform.value)
 		let data = this.userform.value;
-		data.realPhone = data.phone;
-		if (data.phone[0] == 0) {
-			data.phone = data.phone.substr(1);
-		}
-		data.countryCode = '+1';
-		data.phone = data.countryCode + data.phone;
+		// data.realPhone = data.phone;
+		// if (data.phone[0] == 0) {
+		// 	data.phone = data.phone.substr(1);
+		// }
+		// data.countryCode = '+1';
+		// data.phone = data.countryCode + data.phone;
 		this.isLoading = true;
 		this.invalid = false;
 		this.http.post(Config.url + Config.api.user, data).subscribe(data => {
@@ -66,6 +70,8 @@ export class SignupComponent implements OnInit {
 				user: data,
 				token: null
 			}));
+
+			this.email = this.userform.value.email;
 
 			let dataUser = <any>data;
 			if (data == 422) {

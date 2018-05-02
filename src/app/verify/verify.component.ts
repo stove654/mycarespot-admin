@@ -28,6 +28,9 @@ export class VerifyComponent implements OnInit {
 	isLoading =  false;
 	user = JSON.parse(window.localStorage.getItem('auth')).user;
 	invalid = false;
+	phoneform: FormGroup;
+	isVerify = false;
+
 	/**
 	 * Set our default values
 	 */
@@ -39,6 +42,9 @@ export class VerifyComponent implements OnInit {
 	}
 
 	public ngOnInit() {
+		this.phoneform = new FormGroup({
+			realPhone: new FormControl()
+		});
 		this.verifyform = new FormGroup({
 			code: new FormControl()
 		});
@@ -69,6 +75,26 @@ export class VerifyComponent implements OnInit {
 			self.invalid = true;
 		});
 		console.log(params)
+	}
+
+	requestPhone() {
+
+		let data = this.phoneform.value;
+		data.phone = data.realPhone;
+		if (data.phone[0] == 0) {
+			data.phone = data.phone.substr(1);
+		}
+		data.countryCode = '+84';
+		data.phone = data.countryCode + data.phone;
+		data._id = self.user._id;
+		this.isLoading =  true;
+		this.http.post(Config.url + Config.api.requestCode, data).subscribe(data => {
+			this.isLoading =  false;
+			this.isVerify = true;
+			this.user = data;
+		}, function () {
+
+		});
 	}
 
 

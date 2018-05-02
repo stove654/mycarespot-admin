@@ -7,7 +7,7 @@
 			<button type="submit" class="btnGen" [disabled]="!loginform.valid" *ngIf="!isLoading">Log in</button>
 			<button type="button" class="btnGen" *ngIf="isLoading">Sending...</button>
 			<div class="msgError" *ngIf="invalid">Sorry, invalid email or password.</div>
-			<a href="" class="linkGray center forgot">Forgot password?</a>
+			<a (click)="goForgot()" class="linkGray center forgot">Forgot password?</a>
 		</form>
 	</div>
 	<div class="box boxWidth boxMin center create">
