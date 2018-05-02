@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule, PreloadAllModules} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -20,6 +21,8 @@ import {LoginComponent} from './login';
 import {SignupComponent} from './signup';
 import {VerifyComponent} from './verify';
 import {EmailComponent} from './email';
+import {ForgotPasswordComponent} from './forgot-password';
+import {ConfirmResetPasswordComponent} from './confirm-reset-password';
 import {NoContentComponent} from './no-content';
 import {XLargeDirective} from './home/x-large';
 import {DevModuleModule} from './+dev-module';
@@ -53,7 +56,9 @@ interface StoreType {
 		LoginComponent,
 		SignupComponent,
 		VerifyComponent,
-		EmailComponent
+		EmailComponent,
+		ForgotPasswordComponent,
+		ConfirmResetPasswordComponent
 	],
 	/**
 	 * Import Angular's modules.
@@ -68,6 +73,7 @@ interface StoreType {
 			preloadingStrategy: PreloadAllModules
 		}),
 		ReactiveFormsModule,
+		RecaptchaModule.forRoot(),
 
 		/**
 		 * This section will import the `DevModuleModule` only in certain build types.

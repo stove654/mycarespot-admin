@@ -86,4 +86,8 @@ export class SignupComponent implements OnInit {
 		});
 	}
 
+	goForgot() {
+		this.router.navigate(['forgot-password']);
+	}
+
 }

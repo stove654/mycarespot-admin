@@ -7,5 +7,7 @@ export const Config = {
 		verifyEmail: '/auth/verify-email/',
 		requestCode: '/auth/request-sms/',
 		country: '/api/country/',
+		resetPassword: '/auth/reset-password/',
+		verifyResetPassword: '/auth/verify-reset-password/'
 	}
 };
