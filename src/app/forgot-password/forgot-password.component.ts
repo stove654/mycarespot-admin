@@ -42,7 +42,6 @@ export class ForgotPasswordComponent implements OnInit {
 	public ngOnInit() {
 		self.resetform = new FormGroup({
 			email: new FormControl(),
-			password: new FormControl(),
 		});
 	}
 
@@ -59,6 +58,7 @@ export class ForgotPasswordComponent implements OnInit {
 				self.email = self.resetform.email
 			}
 		}, function () {
+			self.isLoading = false;
 			self.invalid = true;
 		});
 		console.log(self.resetform.value)

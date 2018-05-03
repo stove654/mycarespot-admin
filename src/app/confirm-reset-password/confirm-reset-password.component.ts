@@ -24,6 +24,8 @@ let self;
 })
 export class ConfirmResetPasswordComponent implements OnInit {
 	isResetPassword = false;
+	resetform: FormGroup;
+
 	/**
 	 * Set our default values
 	 */
@@ -32,9 +34,19 @@ export class ConfirmResetPasswordComponent implements OnInit {
 	 */
 	constructor(public appState: AppState,  private http: HttpClient, private router: Router) {
 		self = this;
+
+		self.resetform = new FormGroup({
+			password: new FormControl(),
+			repassword: new FormControl(),
+		});
 	}
 
 	public ngOnInit() {
+
+	}
+
+
+	resetPassword() {
 		function gup( name, url ) {
 			if (!url) url = location.href;
 			name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
@@ -45,10 +57,10 @@ export class ConfirmResetPasswordComponent implements OnInit {
 		}
 
 		const token = gup('token', window.location);
-		console.log(token)
-		console.log(token, Config.url + Config.api.verifyResetPassword);
+
 		this.http.post(Config.url + Config.api.verifyResetPassword, {
-			token: token
+			token: token,
+			password: self.resetform.value.password
 		}).subscribe(data => {
 			console.log(data)
 			window.localStorage.setItem('auth', JSON.stringify({
@@ -62,7 +74,6 @@ export class ConfirmResetPasswordComponent implements OnInit {
 		}, function () {
 		});
 	}
-
 
 
 }
